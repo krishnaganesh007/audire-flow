@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+html,
+body,
+#root {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* ──────────────────────────────────
+   Document Canvas — Preserve Original Formatting
+   ────────────────────────────────── */
+
+/* Background behind the page */
+.doc-canvas-bg {
+    background: #f0f1f3;
+}
+
+/* A4 page container */
+.doc-page {
+    background: white;
+    width: 816px;
+    min-height: 1056px;
+    padding: 72px 80px;
+    box-sizing: border-box;
+    position: relative;
+    border: none;
+    box-shadow:
+        0 0 0 0.5px rgba(0, 0, 0, 0.06),
+        0 1px 3px rgba(0, 0, 0, 0.08),
+        0 4px 12px rgba(0, 0, 0, 0.04);
+    margin-bottom: 16px;
+    cursor: text;
+}
+
+/* ── Minimal overrides: preserve original doc fonts/styles,
+     only add spacing and table borders ── */
+
+.doc-page p {
+    margin: 0 0 6px;
+    line-height: 1.5;
+}
+
+/* Section breaks after headers */
+.doc-page h1 {
+    margin: 24px 0 10px;
+    line-height: 1.3;
+}
+
+.doc-page h2 {
+    margin: 20px 0 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #e0e0e0;
+    line-height: 1.3;
+}
+
+.doc-page h3 {
+    margin: 16px 0 6px;
+    line-height: 1.3;
+}
+
+/* ── Tables — add borders while preserving original cell formatting ── */
+.doc-page table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+}
+
+.doc-page thead tr:first-child {
+    background: #f3f3f3;
+}
+
+.doc-page thead th,
+.doc-page tbody td {
+    padding: 8px 10px;
+    border: 1px solid #c0c0c0;
+    vertical-align: top;
+    text-align: left;
+}
+
+/* Data rows in thead (mammoth quirk) */
+.doc-page thead tr:not(:first-child) {
+    background: white;
+}
+
+.doc-page thead tr:not(:first-child) th {
+    border: 1px solid #c0c0c0;
+    padding: 8px 10px;
+    vertical-align: top;
+}
+
+/* Subtle hover on data rows */
+.doc-page tbody tr:hover,
+.doc-page thead tr:not(:first-child):hover {
+    background-color: #e8f0fe;
+    transition: background-color 0.1s ease;
+}
+
+/* ── Lists ── */
+.doc-page ul,
+.doc-page ol {
+    padding-left: 28px;
+    margin: 4px 0 10px;
+}
+
+.doc-page li {
+    margin-bottom: 2px;
+    line-height: 1.5;
+}
+
+/* ── Links (keep original behavior) ── */
+.doc-page a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* ── Editable focus states ── */
+.doc-page:focus {
+    outline: none;
+}
+
+/* Selection color (Google Docs blue) */
+.doc-page ::selection {
+    background: #a8d1ff;
+}
+
+.doc-page [contenteditable="true"] {
+    caret-color: #000;
+}
+
+/* ── Refinement Cell Overrides ── */
+.doc-page .relative.group {
+    overflow: visible;
+}
+
+/* Edited cell highlight */
+.doc-page [data-edited="true"] {
+    background-color: #fef9c3;
+    transition: background-color 0.3s ease;
+}
+
+/* ── Edit indicator toast ── */
+.edit-indicator {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #1a73e8;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.edit-indicator.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

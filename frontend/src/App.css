@@ -1,0 +1,5 @@
+/* Reset default Vite styles - we want full viewport */
+#root {
+  width: 100%;
+  height: 100%;
+}
