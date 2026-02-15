@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Upload } from 'lucide-react';
+import { Upload, FileUp } from 'lucide-react';
 import clsx from 'clsx';
 
 interface FileUploadProps {
@@ -40,8 +40,10 @@ export const FileUpload: React.FC<FileUploadProps> = ({ onFileSelect, isUploadin
             onDrop={handleDrop}
             onDragOver={(e) => e.preventDefault()}
             className={clsx(
-                "border-2 border-dashed rounded-lg p-12 text-center transition-colors cursor-pointer",
-                isUploading ? "bg-gray-50 border-gray-300 opacity-50 cursor-not-allowed" : "border-gray-300 hover:border-blue-500 hover:bg-blue-50"
+                "border-2 border-dashed rounded-xl p-6 text-center transition-all duration-200 cursor-pointer",
+                isUploading
+                    ? "bg-gray-50 border-gray-200 opacity-60 cursor-not-allowed"
+                    : "border-gray-200 hover:border-blue-400 hover:bg-blue-50/40"
             )}
         >
             <input
@@ -53,16 +55,23 @@ export const FileUpload: React.FC<FileUploadProps> = ({ onFileSelect, isUploadin
                 disabled={isUploading}
             />
             <label htmlFor="file-upload" className={clsx("cursor-pointer", isUploading && "cursor-not-allowed")}>
-                <div className="flex flex-col items-center gap-4">
-                    <div className="p-4 bg-blue-100 rounded-full text-blue-600">
-                        <Upload size={32} />
+                <div className="flex flex-col items-center gap-3">
+                    <div className={clsx(
+                        "w-10 h-10 rounded-xl flex items-center justify-center transition-colors duration-200",
+                        isUploading ? "bg-gray-100 text-gray-400" : "bg-blue-50 text-blue-500"
+                    )}>
+                        {isUploading ? (
+                            <div className="w-5 h-5 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin" />
+                        ) : (
+                            <FileUp size={20} />
+                        )}
                     </div>
                     <div>
-                        <p className="text-lg font-medium text-gray-900">
-                            {isUploading ? 'Processing...' : 'Click to upload or drag and drop'}
+                        <p className="text-[13px] font-medium text-gray-700">
+                            {isUploading ? 'Processing...' : 'Drop file or click to browse'}
                         </p>
-                        <p className="text-sm text-gray-500 mt-1">
-                            Supported formats: .docx, .pdf
+                        <p className="text-[11px] text-gray-400 mt-1">
+                            .docx, .pdf
                         </p>
                     </div>
                 </div>

@@ -1,11 +1,16 @@
 @import "tailwindcss";
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 html,
 body,
 #root {
     height: 100%;
     margin: 0;
     overflow: hidden;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* ──────────────────────────────────
@@ -32,6 +37,7 @@ body,
         0 4px 12px rgba(0, 0, 0, 0.04);
     margin-bottom: 16px;
     cursor: text;
+    border-radius: 2px;
 }
 
 /* ── Minimal overrides: preserve original doc fonts/styles,
@@ -94,7 +100,7 @@ body,
 .doc-page tbody tr:hover,
 .doc-page thead tr:not(:first-child):hover {
     background-color: #e8f0fe;
-    transition: background-color 0.1s ease;
+    transition: background-color 0.15s ease;
 }
 
 /* ── Lists ── */
@@ -145,21 +151,40 @@ body,
     position: fixed;
     bottom: 24px;
     right: 24px;
-    background: #1a73e8;
+    background: #1a1a2e;
     color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
+    padding: 10px 18px;
+    border-radius: 12px;
     font-family: 'Inter', system-ui, sans-serif;
     font-size: 12px;
     font-weight: 500;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
     z-index: 100;
     opacity: 0;
     transform: translateY(8px);
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    letter-spacing: -0.01em;
 }
 
 .edit-indicator.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* ── Scrollbar styling ── */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
 }
